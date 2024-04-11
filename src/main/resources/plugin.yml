@@ -1,0 +1,4 @@
+name: ArtFlower
+version: '${version}'
+main: de.l50n.artflower.ArtFlower
+api-version: '1.20'
