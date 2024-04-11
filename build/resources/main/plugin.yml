@@ -1,5 +1,5 @@
 name: ArtFlower
-version: '${version}'
+version: '1.0-SNAPSHOT'
 main: de.l50n.artflower.main.ArtFlower
 api-version: '1.20'
 author: "L5ONdev"
