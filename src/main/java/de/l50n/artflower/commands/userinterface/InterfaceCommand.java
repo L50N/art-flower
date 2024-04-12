@@ -1,5 +1,7 @@
 package de.l50n.artflower.commands.userinterface;
 
+import de.l50n.artflower.inventory.InterfaceInventory;
+import de.l50n.artflower.main.ArtFlower;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -15,7 +17,29 @@ public class InterfaceCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 1, 1); // Needs to get tested
+
+            InterfaceInventory interfaceInventory = new InterfaceInventory();
+            if (strings.length == 1) {
+                switch (strings[0].toLowerCase()) {
+                    case "help":
+                        player.sendMessage(ArtFlower.getPrefix() + " Usage: /interface §o(help/open/version/gh)");
+                        break;
+                    case "version":
+                        player.sendMessage(ArtFlower.getPrefix() + " The status is retrieved...");
+                        player.performCommand("version artflower");
+                        break;
+                    case "gh":
+                        player.sendMessage(ArtFlower.getPrefix() + " https://github.com/L50N/art-flower");
+                        break;
+                    default:
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                        interfaceInventory.openInventory(player.getPlayer());
+                        break;
+                }
+            } else {
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                interfaceInventory.openInventory(player.getPlayer());
+            }
         } else {
             Bukkit.getLogger().log(Level.INFO, "Dieser Befehl muss von einem Spieler ausgeführt werden!");
         }
