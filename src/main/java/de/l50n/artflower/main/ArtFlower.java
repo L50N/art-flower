@@ -1,6 +1,6 @@
 package de.l50n.artflower.main;
 
-import de.l50n.artflower.commands.RegisterCommandHandler;
+import de.l50n.artflower.commands.CommandHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -17,8 +17,8 @@ public final class ArtFlower extends JavaPlugin {
         // Plugin startup logic
         instance = this;
 
-        RegisterCommandHandler registerCommandHandler = new RegisterCommandHandler();
-        registerCommandHandler.registerCommands();
+        CommandHandler commandHandler = new CommandHandler();
+        commandHandler.registerCommands();
     }
 
     @Override
