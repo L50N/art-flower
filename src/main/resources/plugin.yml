@@ -3,12 +3,22 @@ version: '${version}'
 main: de.l50n.artflower.main.ArtFlower
 api-version: '1.20'
 author: "L5ONdev"
+description: "An open-source builder utility created by the team behind AuroxMC."
 
 commands:
   interface:
     description: "Use the command to open the ArtFlower interface. Then you can then create a flower within the UI."
-    permission: "artflower.use"
-    permission-message: "§8[§cArtFlower§8] §7You do not have the required authorizations! §o(artflower.use)"
+    permission: "artflower.interface"
+    permission-message: "§f・§cArtFlower §7>> You do not have the required authorizations! (artflower.interface)"
     aliases:
       - af
       - artflower
+
+  gm:
+    description: "Use this command to switch to game mode more easily."
+    permission: "artflower.gm"
+    permission-message: "§f・§cArtFlower §7>> You do not have the required authorizations! (artflower.gm)"
+    aliases:
+      - switch
+      - change
+      - gamemode

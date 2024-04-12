@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ArtFlower extends JavaPlugin {
     public static ArtFlower instance;
-    public static String ArcPrefix = "§8[§cArcFlower§8]§7";
+    public static String ArcPrefix = "§f・§cArtFlower §7>>";
 
     @Override
     public void onEnable() {

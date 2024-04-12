@@ -21,14 +21,11 @@ public class InterfaceCommand implements CommandExecutor {
             InterfaceInventory interfaceInventory = new InterfaceInventory();
             if (strings.length == 1) {
                 switch (strings[0].toLowerCase()) {
-                    case "help":
-                        player.sendMessage(ArtFlower.getPrefix() + " Usage: /interface §o(help/open/version/gh)");
-                        break;
                     case "version":
                         player.sendMessage(ArtFlower.getPrefix() + " The status is retrieved...");
                         player.performCommand("version artflower");
                         break;
-                    case "gh":
+                    case "gh", "github", "sourcecode":
                         player.sendMessage(ArtFlower.getPrefix() + " https://github.com/L50N/art-flower");
                         break;
                     default:
@@ -41,7 +38,7 @@ public class InterfaceCommand implements CommandExecutor {
                 interfaceInventory.openInventory(player.getPlayer());
             }
         } else {
-            Bukkit.getLogger().log(Level.INFO, "Dieser Befehl muss von einem Spieler ausgeführt werden!");
+            Bukkit.getLogger().log(Level.INFO, "You must be a player to execute this command!");
         }
         return false;
     }
