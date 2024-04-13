@@ -11,7 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,10 +32,6 @@ public class InterfaceInventory implements Listener {
     }
 
     private void initializeInventory() {
-        for (int i = 0; i < inventory.getSize(); i++) {
-            inventory.setItem(i, null);
-        }
-
         initializeBottomBarItems();
         initializeFlowers();
     }
@@ -142,7 +138,11 @@ public class InterfaceInventory implements Listener {
         for (Material flower : flowers) {
             i++;
             if (i <= 35) {
-                inventory.setItem(i, new ItemStack(flower));
+                ItemBuilder flowerItem = new ItemBuilder(null, flower, 1);
+                flowerItem.setLore("§7§oPick to plant in your flower...");
+                flowerItem.build();
+
+                inventory.setItem(i, flowerItem.getItemStack());
             }
         }
     }
