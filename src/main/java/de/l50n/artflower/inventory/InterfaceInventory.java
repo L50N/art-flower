@@ -27,7 +27,17 @@ public class InterfaceInventory implements Listener {
     }
 
     public void openInventory(final HumanEntity player) {
+        initializeInventory();
         player.openInventory(inventory);
+    }
+
+    private void initializeInventory() {
+        for (int i = 0; i < inventory.getSize(); i++) {
+            inventory.setItem(i, null);
+        }
+
+        initializeBottomBarItems();
+        initializeFlowers();
     }
 
     private void initializeBottomBarItems() {
@@ -70,7 +80,7 @@ public class InterfaceInventory implements Listener {
     }
 
     private void cleanupInventory() {
-        for (int i = 0; i < 35; i++) {
+        for (int i = 0; i <= 35; i++) {
             inventory.setItem(i, null);
         }
     }
@@ -107,8 +117,33 @@ public class InterfaceInventory implements Listener {
         flowers.add(Material.PITCHER_POD);
         flowers.add(Material.PINK_PETALS);
 
+        // Testing flowers
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+        flowers.add(Material.PINK_PETALS);
+
+        int i = -1;
         for (Material flower : flowers) {
-            inventory.addItem(new ItemStack(flower));
+            i++;
+            if (i <= 35) {
+                inventory.setItem(i, new ItemStack(flower));
+            }
         }
     }
 
