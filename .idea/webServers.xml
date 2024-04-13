@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="6f2bf49f-724e-4ed9-a928-d5cd2cf84732" name="localhost" url="http://localhost">
+        <fileTransfer mountedRoot="C:\Users\Leon\Documents\PaperMC 1.20.1 Server" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>
