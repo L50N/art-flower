@@ -1,5 +1,6 @@
 package de.l50n.artflower.inventory;
 
+import de.l50n.artflower.main.ArtFlower;
 import de.l50n.artflower.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -11,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,14 +21,14 @@ import java.util.Map;
 public class InterfaceInventory implements Listener {
     private HashMap<Integer, ItemBuilder> inventoryItems = new HashMap<>();
     private final Inventory inventory;
+    private Player player;
 
     public InterfaceInventory() {
         inventory = Bukkit.createInventory(null, 9*6, "ArtFlower Interface");
-        initializeBottomBarItems();
-        initializeFlowers();
     }
 
     public void openInventory(final HumanEntity player) {
+        this.player = (Player) player;
         initializeInventory();
         player.openInventory(inventory);
     }
@@ -34,6 +36,7 @@ public class InterfaceInventory implements Listener {
     private void initializeInventory() {
         initializeBottomBarItems();
         initializeFlowers();
+        cleanupSelection();
     }
 
     private void initializeBottomBarItems() {
@@ -67,6 +70,9 @@ public class InterfaceInventory implements Listener {
 
         ItemBuilder resetConfiguration = new ItemBuilder("§aReset configuration", Material.BREWING_STAND);
         resetConfiguration.setLore("§7§oCreate a new flower by deleting your old one.");
+        resetConfiguration.setOnClick(event -> {
+            cleanupSelection();
+        });
         resetConfiguration.build();
         inventoryItems.put(42, resetConfiguration);
 
@@ -140,10 +146,37 @@ public class InterfaceInventory implements Listener {
             if (i <= 35) {
                 ItemBuilder flowerItem = new ItemBuilder(null, flower, 1);
                 flowerItem.setLore("§7§oPick to plant in your flower...");
+                flowerItem.setOnClick(this::addItemToSelection);
                 flowerItem.build();
 
                 inventory.setItem(i, flowerItem.getItemStack());
+                inventoryItems.put(i, flowerItem);
             }
+        }
+    }
+
+    private void addItemToSelection(InventoryClickEvent event) {
+        int clickedSlot = event.getSlot();
+        ItemBuilder clickedItem = inventoryItems.get(clickedSlot);
+
+        if (clickedItem != null) {
+            boolean allSlotsFilledUp = true;
+            for (int i = 45; i <= 53; i++) {
+                if (inventory.getItem(i) == null) {
+                    inventory.setItem(i, clickedItem.getItemStack());
+                    allSlotsFilledUp = false;
+                    break;
+                }
+            }
+            if (allSlotsFilledUp) {
+                player.sendMessage(ArtFlower.getPrefix() + " All slots are already filled!");
+            }
+        }
+    }
+
+    private void cleanupSelection() {
+        for (int i = 45; i <= 53; i++) {
+            inventory.setItem(i, null);
         }
     }
 
