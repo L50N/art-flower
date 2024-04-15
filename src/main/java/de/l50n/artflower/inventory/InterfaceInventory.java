@@ -12,7 +12,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,6 +51,10 @@ public class InterfaceInventory implements Listener {
         // Inventory Bottom-Bar (Items)
         ItemBuilder backItem = new ItemBuilder("§aOne page back", Material.PLAYER_HEAD);
         backItem.setLore("§7§oGo back one page of the flower list");
+        backItem.setOnClick(event -> {
+            cleanupInventory();
+            initializeFlowers();
+        });
         backItem.buildCustomHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDAyY2YwZGVhNGQwNmVmMWRlMjU1YmI4MTVmNjQyNjhkNjhiYjNiOTAzZDYwNjIxYWU5MmUwMDdlMjg4MTk4YyJ9fX0=");
         inventoryItems.put(38, backItem);
 
@@ -59,6 +62,7 @@ public class InterfaceInventory implements Listener {
         nextItem.setLore("§7§oGo one page further in the flower list");
         nextItem.setOnClick(event -> {
             cleanupInventory();
+            initializeFlowers();
         });
         nextItem.buildCustomHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjVkYTE4NDU0NmEwNWRlOTZhNGQxZmI4MjBmNzJjMDlmMTU5N2RmNTZkODhhNGFiMzVlOWI0YTJjNzgwYWI4NCJ9fX0=");
         inventoryItems.put(39, nextItem);
